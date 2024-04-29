@@ -19,7 +19,7 @@ export default function Charts(props) {
         await axios
         .post(`${server}/visualize/`,props.dataframe)
         .then((res) =>{
-            setData(res.data);
+            setData(res.data.avg_product_cost);
             setDisplay("flex")
             console.log(res.data)
         })
@@ -35,8 +35,9 @@ export default function Charts(props) {
                     data: data,
                     },
                 ]}
-                width={400}
-                height={200}
+                width={600}
+                height={400}
+                title='Average product cost in filtered data'
             />
         </Box>
     </div>
