@@ -20,5 +20,6 @@ from core.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/',filter_csv )
+    path('api/',filter_csv ),
+    path('visualize/',visualize)
 ]

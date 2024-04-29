@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import FilterBar from '../components/FilterBar'
 import ResultTable from '../components/ResultTable'
+import Charts from '../components/Charts'
 
 export default function Dashboard() {
 
@@ -30,12 +31,14 @@ export default function Dashboard() {
    2: 'HOD Cabin Cupboard',
    3: 'HOD Cabin Cupboard',
    4: 'HOD Cabin Cupboard'}});
+   
    const [display,setDisplay] = useState("none")
 
   return (
     <div className='w-full min-h-screen bg-blue-900'>
         <FilterBar setTableData={setTableData} setDisplay={setDisplay}/>
         <ResultTable tableData={tableData} display={display}/>
+        <Charts dataframe={tableData}/>
     </div>
   )
 }

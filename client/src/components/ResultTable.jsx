@@ -44,7 +44,7 @@ export default function ResultTable(props) {
 
     const data = props.tableData;
     console.log("Table data");
-    console.log(data)
+    // console.log(data)
 
   return (
     <TableContainer component={Paper} sx={{display:props.display}}>

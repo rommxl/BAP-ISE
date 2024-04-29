@@ -12,7 +12,7 @@ df.dropna(inplace=True)
 def filter_csv(request):
     if(request.method == 'POST'):
         search = json.loads(request.body.decode('utf-8'))
-        print(search)
+        # print(search)
         new_df = df.copy()
         new_df['Date'] = pd.to_datetime(new_df['Date'], format='%d/%m/%Y')
 
@@ -34,5 +34,17 @@ def filter_csv(request):
             #         continue
             else:
                 new_df = new_df[new_df[param] == search[param]]
-        print(new_df)
+        # print(new_df)
         return JsonResponse(new_df.to_dict())
+
+def visualize(request):
+    if(request.method == 'POST'):
+        data = json.loads(request.body.decode('utf-8'))
+        df = pd.DataFrame(data)
+        avg_product_cost = df.groupby('Product Type')['Amount'].mean()
+
+        avg_product_cost_vis = []
+        for i,slice in enumerate(avg_product_cost.to_dict().keys()):
+            avg_product_cost_vis.append({"id":i,"value":avg_product_cost[slice],"label":slice})
+        print(avg_product_cost_vis)
+    return JsonResponse({"avg_product_cost":avg_product_cost_vis})

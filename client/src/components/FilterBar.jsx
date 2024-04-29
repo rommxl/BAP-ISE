@@ -55,10 +55,10 @@ export default function FilterBar(props) {
         .then((res) => {
             props.setTableData(res.data)
             props.setDisplay("flex")
-            console.log(res.data)
+            // console.log(res.data)
         })
 
-        console.log(searchJson)
+        // console.log(searchJson)
         // Perform filtering or any other action here
         e.preventDefault();
     };
