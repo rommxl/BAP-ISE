@@ -70,7 +70,7 @@ export default function ResultTable(props) {
               </StyledTableCell>
               <StyledTableCell align="right">{data['Description'][srno]}</StyledTableCell>
               <StyledTableCell align="right">{data['Qty'][srno]}</StyledTableCell>
-              <StyledTableCell align="right">{data['Date'][srno]}</StyledTableCell>
+              <StyledTableCell align="right">{data['Date'][srno].slice(0,10)}</StyledTableCell>
               <StyledTableCell align="right">{data['Supplier'][srno]}</StyledTableCell>
               <StyledTableCell align="right">{data['Main'][srno]}</StyledTableCell>
               <StyledTableCell align="right">{data['Lab'][srno]}</StyledTableCell>

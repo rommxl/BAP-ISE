@@ -32,7 +32,7 @@ export default function FilterBar(props) {
     const [date, setDate] = useState();
     const [supplier, setSupplier] = useState();
     const [labNumber, setLabNumber] = useState();
-    const [currentCategory, setCurrentCategory] = useState(0);
+    const [currentCategory, setCurrentCategory] = useState(-1);
 
     const handleDescriptionChange = (e) => setDescription(e.target.value);
     const handleDateChange = (e) => setDate(e.target.value);
