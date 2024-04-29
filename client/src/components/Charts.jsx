@@ -35,7 +35,7 @@ export default function Charts(props) {
                     data: data,
                     },
                 ]}
-                width={600}
+                width={1100}
                 height={400}
                 title='Average product cost in filtered data'
             />

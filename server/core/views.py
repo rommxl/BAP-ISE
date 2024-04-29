@@ -38,7 +38,15 @@ def filter_csv(request):
         # print(new_df)
         return JsonResponse(new_df.to_dict())
     
-def get_piechart_data(df: pd.DataFrame, group_by, aggregate_col):
+def get_piechart_data_sum(df: pd.DataFrame, group_by, aggregate_col):
+    pie_data = df.groupby(group_by)[aggregate_col].sum()
+
+    pie_data_vis = []
+    for i,slice in enumerate(pie_data.to_dict().keys()):
+        pie_data_vis.append({"id":i,"value":pie_data[slice],"label":slice})
+    return (pie_data_vis)
+
+def get_piechart_data_avg(df: pd.DataFrame, group_by, aggregate_col):
     pie_data = df.groupby(group_by)[aggregate_col].mean()
 
     pie_data_vis = []
@@ -50,11 +58,13 @@ def visualize(request):
     if(request.method == 'POST'):
         data = json.loads(request.body.decode('utf-8'))
         df = pd.DataFrame(data)
-        avg_product_cost_vis = get_piechart_data(df,'Product Type','Amount')
+        avg_product_cost_vis = get_piechart_data_avg(df,'Product Type','Amount')
+        tot_product_qty_vis = get_piechart_data_sum(df,'Product Type','Qty')
+        print(tot_product_qty_vis)
         # avg_product_cost = df.groupby('Product Type')['Amount'].mean()
 
         # avg_product_cost_vis = []
         # for i,slice in enumerate(avg_product_cost.to_dict().keys()):
         #     avg_product_cost_vis.append({"id":i,"value":avg_product_cost[slice],"label":slice})
         # print(avg_product_cost_vis)
-    return JsonResponse({"avg_product_cost":avg_product_cost_vis})
+    return JsonResponse({"avg_product_cost":avg_product_cost_vis,"tot_product_qty":tot_product_qty_vis,})
