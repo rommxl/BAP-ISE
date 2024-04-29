@@ -18,15 +18,15 @@ def filter_csv(request):
 
         for param in search.keys():
             print(f"When {param} is {search[param]}")
-            if(search[param] == None or type(search[param])==int or len(search[param]) == 0):
+            if(search[param] == None or (type(search[param])!=int and len(search[param]) == 0)):
                 continue
             if(param == 'Description'):
                 new_df = new_df[new_df['Description'].str.contains(search[param])]
             if(param == 'Lab'):
-                if(search[param] == None):
-                    continue
-                else:
-                    new_df = new_df[new_df['Lab'] == int(search[param])]
+                # if(search[param] == None):
+                #     continue
+                # else:
+                new_df = new_df[new_df['Lab'] == (search[param])]
             if(param == 'Date'):
                 new_df = new_df[new_df['Date'] >= pd.to_datetime(search['Date'], format='%m/%Y')]
             # if(param == 'Product Type'):

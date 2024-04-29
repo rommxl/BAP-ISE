@@ -46,7 +46,7 @@ export default function FilterBar(props) {
             "Description":description,
             "Date":date,
             "Supplier":supplier,
-            "Lab":parseInt(labNumber),
+            "Lab":parseFloat(labNumber),
             "Product Type":item_cat[currentCategory]
         }
 
