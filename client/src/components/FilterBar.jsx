@@ -23,7 +23,7 @@ export default function FilterBar(props) {
     const boxStyle = {
         width:"100vw",
         minHeight:"5rem",
-        backgroundColor:"red"
+        // backgroundColor:"blue"
     }
     // const[curentCategory,setCurrentCategory] = useState("1");
     // const categoryChange = (e) => setCurrentCategory (e.target.value)
@@ -65,7 +65,7 @@ export default function FilterBar(props) {
 
     return (
         <div>
-            <Box sx={boxStyle} className="flex justify-evenly p-4">
+            <Box sx={boxStyle} className="flex justify-evenly p-4 bg-blue-100">
                 <TextField id="description" label="Description" variant="outlined" value={description} onChange={handleDescriptionChange} />
                 <TextField id="date" label="Date" variant="outlined" placeholder='MM/YYYY' value={date} onChange={handleDateChange} />
                 <TextField id="supplier" label="Supplier" variant="outlined" value={supplier} onChange={handleSupplierChange} />
