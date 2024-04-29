@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Box,TextField, Select, MenuItem,Button } from '@mui/material'
+import axios from "axios"
 
-import { item_cat } from '../constants';
+import { item_cat,server } from '../constants';
 
 
 function MenuItemGen(key){
@@ -17,7 +18,7 @@ function handleClick(e){
 }
 
 
-export default function FilterBar() {
+export default function FilterBar(props) {
 
     const boxStyle = {
         width:"100vw",
@@ -27,11 +28,11 @@ export default function FilterBar() {
     // const[curentCategory,setCurrentCategory] = useState("1");
     // const categoryChange = (e) => setCurrentCategory (e.target.value)
 
-    const [description, setDescription] = useState('');
-    const [date, setDate] = useState('');
-    const [supplier, setSupplier] = useState('');
-    const [labNumber, setLabNumber] = useState('');
-    const [currentCategory, setCurrentCategory] = useState("1");
+    const [description, setDescription] = useState();
+    const [date, setDate] = useState();
+    const [supplier, setSupplier] = useState();
+    const [labNumber, setLabNumber] = useState();
+    const [currentCategory, setCurrentCategory] = useState(0);
 
     const handleDescriptionChange = (e) => setDescription(e.target.value);
     const handleDateChange = (e) => setDate(e.target.value);
@@ -39,20 +40,25 @@ export default function FilterBar() {
     const handleLabNumberChange = (e) => setLabNumber(e.target.value);
     const categoryChange = (e) => setCurrentCategory(e.target.value);
 
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
         // Accessing the values of the text fields
-        console.log('Description:', description);
-        console.log('Date:', date);
-        console.log('Supplier:', supplier);
-        console.log('Lab Number:', labNumber);
-        console.log('Product type:', item_cat[currentCategory]);
         const searchJson = {
-            description:description,
-            date:date,
-            supplier:supplier,
-            labNumber:labNumber,
-            currentCategory:item_cat[currentCategory]
+            "Description":description,
+            "Date":date,
+            "Supplier":supplier,
+            "Lab":parseInt(labNumber),
+            "Product Type":item_cat[currentCategory]
         }
+
+        await axios
+        .post(`${server}/api/`, searchJson)
+        .then((res) => {
+            props.setTableData(res.data)
+            props.setDisplay("flex")
+            console.log(res.data)
+        })
+
+        console.log(searchJson)
         // Perform filtering or any other action here
         e.preventDefault();
     };
